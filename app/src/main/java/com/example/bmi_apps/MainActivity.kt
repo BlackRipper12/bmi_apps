@@ -1,5 +1,6 @@
     package com.example.bmi_apps
 
+    import android.content.Intent
     import androidx.appcompat.app.AppCompatActivity
     import android.os.Bundle
     import android.widget.Button
@@ -20,6 +21,7 @@
             val nameNama = findViewById<EditText>(R.id.edtName)
             val alamat = findViewById<EditText>(R.id.edtAlamat)
             val btnCalc = findViewById<Button>(R.id.buttonCalculate)
+            val reset = findViewById<Button>(R.id.resetBtn)
             val editTextHeight = findViewById<EditText>(R.id.edtTextHeight)
             val editTextWeight = findViewById<EditText>(R.id.edtTextWeight)
             val textViewResult = findViewById<TextView>(R.id.viewResult)
@@ -28,7 +30,21 @@
             btnCalc.setOnClickListener {
                 val bmi = calculateBMI(editTextHeight, editTextWeight, radioGroup, textViewResult)
                 textViewResult.text = "Name: ${nameNama.text}\nAlamat: ${alamat.text}\n$bmi"
+
             }
+
+            reset.setOnClickListener{
+                reset(nameNama, alamat, editTextWeight, editTextHeight,radioGroup,textViewResult)
+            }
+        }
+
+        private fun reset(nameNama : EditText, alamat : EditText, editTextHeight: EditText, editTextWeight: EditText, radioGroup: RadioGroup, textViewResult: TextView){
+            nameNama.setText("")
+            alamat.setText("")
+            editTextHeight.setText("")
+            editTextWeight.setText("")
+            radioGroup.clearCheck()
+            textViewResult.setText("")
         }
 
         private fun calculateBMI(
